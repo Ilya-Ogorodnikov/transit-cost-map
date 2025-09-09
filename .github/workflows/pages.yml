@@ -1,0 +1,77 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]   # деплоим при пушах в main
+  workflow_dispatch:      # и руками из UI
+
+# Разрешения для Pages + OIDC
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Не держать параллельные запуски
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build (lint + test + build)
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1) Код
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2) Node + кеш Yarn
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+
+      # 3) Yarn Berry
+      - name: Enable Corepack
+        run: corepack enable
+
+      # 4) Установка зависимостей
+      - name: Install deps
+        run: |
+          echo "Yarn: $(yarn --version)"
+          yarn install --immutable || yarn install --frozen-lockfile
+
+      # 5) Линт
+      - name: Lint
+        run: yarn lint
+
+      # 6) Тесты (Vitest).
+      - name: Test
+        run: yarn test
+
+      # 7) Сборка прода. Пробрасываем флаг для base в vite.config.ts
+      - name: Build
+        run: |
+          export GITHUB_PAGES=1
+          yarn build
+
+      # 8) Упаковать артефакт для Pages
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # 9) Деплой в Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
