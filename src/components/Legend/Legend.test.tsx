@@ -1,7 +1,6 @@
-// src/components/Legend.test.tsx
 import { describe, it, expect } from 'vitest'
 import { render } from '@testing-library/react'
-import {Legend} from './'
+import { Legend } from './'
 
 describe('<Legend />', () => {
   it('показывает все диапазоны', () => {

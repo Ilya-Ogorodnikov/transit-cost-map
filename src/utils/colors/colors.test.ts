@@ -1,4 +1,3 @@
-// src/utils/colors.test.ts
 import { describe, it, expect } from 'vitest'
 import { colorForCost } from '../colors'
 import { COLORS } from '../../constants'

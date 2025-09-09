@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import type { Site } from '../../types'
 
-// hoisted mocks (чтобы не ловить проблемы с hoisting у vi.mock)
+// hoisted mocks
 const { useMapViewReturn, useMapViewMock, getMarkerPropsMock } = vi.hoisted(() => {
   return {
     useMapViewReturn: {
@@ -43,14 +43,12 @@ vi.mock('./components/ResetOnMapClick', () => ({
 
 // Мокаем react-leaflet: возвращаем лёгкие «заглушки»
 vi.mock('react-leaflet', () => {
-  // Важно: используем новый JSX-трансформ, импорт React здесь не нужен
   const MapContainer = ({ children, ...props }: any) => (
     <div
       data-testid="map-container"
       data-bounds={props.bounds ? JSON.stringify(props.bounds) : ''}
       data-center={props.center ? JSON.stringify(props.center) : ''}
       data-zoom={props.zoom ?? ''}
-      // ref={setMap} мы в тестах не проверяем — forwardRef не подменяем
     >
       {children}
     </div>
