@@ -42,7 +42,7 @@ describe('getBounds', () => {
     const sf = mk(1, 'SF', -122.4194, 37.7749)
     const lon = mk(2, 'London', -0.1278, 51.5074)
 
-    // @ts-expect-error
+    // @ts-expect-error для моков
     const [[minLat, minLon], [maxLat, maxLon]] = getBounds([sf, lon])
 
     // Проверяем именно порядок: сначала широта, потом долгота

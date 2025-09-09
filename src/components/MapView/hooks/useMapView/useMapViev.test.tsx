@@ -47,8 +47,10 @@ describe('useMapView', () => {
     const { result } = renderHook(() => useMapView({ sites: [mkSite(1, 'A')], onSelect }))
 
     // Минимальный мок карты: метод .on(event, handler)
+    // eslint-disable-next-line
     const handlers: Record<string, Function[]> = {}
     const mockMap = {
+      // eslint-disable-next-line
       on: (evt: string, cb: Function) => {
         ;(handlers[evt] ||= []).push(cb)
       },
