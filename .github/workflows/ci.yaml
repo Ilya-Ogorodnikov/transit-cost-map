@@ -76,14 +76,3 @@ jobs:
       - name: Run unit tests
         run: yarn test
 
-      # Если нужно покрытие — раскомментируй блок ниже и добавь upload артефакта
-      # - name: Run unit tests with coverage
-      #   run: yarn test:coverage
-
-      # Пример загрузки покрытия (если включишь шаг выше)
-      # - name: Upload coverage artifact
-      #   if: always()
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: coverage
-      #     path: coverage/
