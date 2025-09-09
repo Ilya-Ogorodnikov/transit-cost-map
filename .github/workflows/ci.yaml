@@ -3,12 +3,12 @@ name: CI (lint + tests)
 on:
   # Триггеры:
   push:
-    branches: [ master ]      # запускать при пуше в master
+    branches: [ main ]      # запускать при пуше в main
     # paths-ignore:           # при желании можно игнорировать изменения в доке/картинках
     #   - '**/*.md'
     #   - 'docs/**'
   pull_request:
-    branches: [ master ]      # и при открытии/обновлении PR в master
+    branches: [ main ]      # и при открытии/обновлении PR в main
 
 # Чтобы параллельные запуски одного и того же ref не дублировались
 concurrency:
