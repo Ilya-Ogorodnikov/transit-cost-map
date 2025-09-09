@@ -17,13 +17,13 @@ const { useMapViewReturn, useMapViewMock, getMarkerPropsMock } = vi.hoisted(() =
 
 // Мокаем хук useMapView (возвращаем объект выше)
 vi.mock('./hooks/useMapView', () => ({
-  // @ts-expect-error
+  // @ts-expect-error для моков
   useMapView: (...args: any[]) => useMapViewMock(...args),
 }))
 
 // Мокаем утилиту getMarkerProps (вернём подготовленные значения ниже)
 vi.mock('../../utils/getMarkerProps', () => ({
-  // @ts-expect-error
+  // @ts-expect-error для моков
   getMarkerProps: (...args: any[]) => getMarkerPropsMock(...args),
 }))
 
@@ -96,7 +96,7 @@ beforeEach(() => {
   useMapViewMock.mockReturnValue(useMapViewReturn)
 
   getMarkerPropsMock.mockReset()
-  // @ts-expect-error
+  // @ts-expect-error для моков
   getMarkerPropsMock.mockImplementation(({ site }: any) => ({
     isOrigin: false,
     costRec: undefined,
@@ -177,7 +177,7 @@ describe('<MapView />', () => {
 
   it('Tooltip получает пропсы из getMarkerProps (isOrigin) и отрисовывается', () => {
     // Подменим поведение для первой точки: isOrigin = true
-    // @ts-expect-error
+    // @ts-expect-error для моков
     getMarkerPropsMock.mockImplementationOnce(({ site }: any) => ({
       isOrigin: true,
       costRec: undefined,
