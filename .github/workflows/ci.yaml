@@ -4,9 +4,6 @@ on:
   # Триггеры:
   push:
     branches: [ main ]      # запускать при пуше в main
-    # paths-ignore:           # при желании можно игнорировать изменения в доке/картинках
-    #   - '**/*.md'
-    #   - 'docs/**'
   pull_request:
     branches: [ main ]      # и при открытии/обновлении PR в main
 
@@ -33,7 +30,7 @@ jobs:
           node-version: 20
           cache: yarn
 
-      # 3) (Опционально) Включаем Corepack, если используете Yarn Berry (>= v3) с "packageManager" в package.json
+      # 3) Включаем Corepack
       - name: Enable Corepack (Yarn Berry)
         run: corepack enable
 
@@ -45,7 +42,7 @@ jobs:
           echo "Yarn version: $(yarn --version)"
           yarn install --immutable || yarn install --frozen-lockfile
 
-      # 5) ESLint (скрипт "lint" уже должен быть в package.json)
+      # 5) ESLint
       - name: Run ESLint
         run: yarn lint
 
@@ -72,7 +69,6 @@ jobs:
           echo "Yarn version: $(yarn --version)"
           yarn install --immutable || yarn install --frozen-lockfile
 
-      # Vitest прогон (если хочешь покрытие — см. следующий шаг)
       - name: Run unit tests
         run: yarn test
 
