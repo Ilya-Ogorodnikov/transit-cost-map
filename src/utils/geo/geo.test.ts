@@ -1,4 +1,3 @@
-// src/utils/geo.test.ts
 import { describe, it, expect } from 'vitest'
 import { getBounds } from './'
 import type { Site } from '../../types'

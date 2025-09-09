@@ -21,7 +21,7 @@ export const useMapView = ({ onSelect, sites}: IUseMapViewParams) => {
     }
   }, [map])
 
-/** Считаем bounds один раз по данным и используем ТОЛЬКО для стартового вью */ 
+  /** Считаем bounds один раз по данным и используем ТОЛЬКО для стартового вью */ 
   const initialBounds = useMemo(() => {
     if (!sites.length) return null
 

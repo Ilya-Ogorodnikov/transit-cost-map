@@ -4,7 +4,6 @@ import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 
 export default [
-  // Игноры вместо .eslintignore
   {
     ignores: ['node_modules/', 'dist/', 'build/', 'coverage/', '.vite/'],
   },
@@ -36,8 +35,8 @@ export default [
       'no-console': 'off',
 
       // React
-      'react/react-in-jsx-scope': 'off', // не нужно с React 17+
-      'react/prop-types': 'off',         // у нас TypeScript
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
 
       // React Hooks
       'react-hooks/rules-of-hooks': 'error',

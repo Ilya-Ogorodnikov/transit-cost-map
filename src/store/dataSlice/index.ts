@@ -23,11 +23,11 @@ const costSchema = z.object({
 });
 
 /**
-* Загружает CSV из `/data` (разделитель `;`) и преобразует их в строготипизированные структуры.
+* Загружает CSV из `/data`  и преобразует их в строготипизированные структуры
 *
-* - Парсинг на клиенте через PapaParse (`header: true`, `delimiter: ';'`)
-* - Валидация каждой строки через `zod`.
-* - Сборка справочника `costsByFrom[fromId][toId] = CostRow` для быстрых поисков.
+* - Парсинг через PapaParse
+* - Валидация каждой строки через `zod`
+* - Сборка справочника `costsByFrom[fromId][toId] = CostRow` для быстрых поисков
 */
 export const loadData = createAsyncThunk("data/load", async (_, { rejectWithValue }) => {
   try {
@@ -64,7 +64,7 @@ export const loadData = createAsyncThunk("data/load", async (_, { rejectWithValu
 });
 
 /**
-* Срез данных.
+* Срез данных
 */
 export type DataState = {
   /** Список остановок из `sites.csv` */
