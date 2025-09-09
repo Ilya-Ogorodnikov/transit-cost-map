@@ -4,6 +4,7 @@ import { selectFromIdSite } from "../../store/uiSlice/selectors";
 import { selectFrom } from "../../store/uiSlice";
 import { Legend } from "../Legend";
 import { SIDEBAR_TEXTS } from "../../constants";
+import styles from './Sidebar.module.css';
 
 /**
  * Сайдбар с легендой и кнопкой сброса выбранной остановки
@@ -13,14 +14,14 @@ export const Sidebar = memo(() => {
   const selectedFromId = useAppSelector(selectFromIdSite);
 
   return (
-    <aside className="sidebar">
+    <aside className={styles.sidebar}>
       <h1>{SIDEBAR_TEXTS.TITLE}</h1>
 
-      <div className="info">{SIDEBAR_TEXTS.INFO}</div>
+      <div className={styles.info}>{SIDEBAR_TEXTS.INFO}</div>
 
-      <div className="controls">
+      <div className={styles.controls}>
         <button
-          className="ghost"
+          className={styles.ghost}
           onClick={() => dispatch(selectFrom(null))}
           disabled={selectedFromId == null}
         >
@@ -28,13 +29,11 @@ export const Sidebar = memo(() => {
         </button>
       </div>
 
-      <h2 style={{ fontSize: 14, margin: "16px 0 8px" }}>{SIDEBAR_TEXTS.LEGEND_TITLE}</h2>
+      <h2 className={styles.legendTitle}>{SIDEBAR_TEXTS.LEGEND_TITLE}</h2>
 
       <Legend />
 
-      <div style={{ marginTop: 16 }} className="info">
-        {SIDEBAR_TEXTS.DATA_INFO}
-      </div>
+      <div className={styles.info}>{SIDEBAR_TEXTS.DATA_INFO}</div>
     </aside>
   );
 });
