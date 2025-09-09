@@ -32,8 +32,8 @@ const costSchema = z.object({
 export const loadData = createAsyncThunk("data/load", async (_, { rejectWithValue }) => {
   try {
     const [sitesCsv, costsCsv] = await Promise.all([
-      fetch("/data/sites.csv").then((r) => r.text()),
-      fetch("/data/costs.csv").then((r) => r.text()),
+      fetch(`${import.meta.env.BASE_URL}data/sites.csv`).then((r) => r.text()),
+      fetch(`${import.meta.env.BASE_URL}data/costs.csv`).then((r) => r.text()),
     ]);
   
     const sitesParsed = Papa.parse<Record<string, string>>(sitesCsv, {
